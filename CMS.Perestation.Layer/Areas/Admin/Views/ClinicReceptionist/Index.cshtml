@@ -1,0 +1,99 @@
+﻿@using CMS.Models.CuraHub.ClinicSection
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CuraHubLayout.cshtml";
+}
+
+@model List<ClinicReceptionist>
+
+<br />
+<form>
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="query" id="SearchInput" placeholder="Search for Clinic Receptionist">
+            </div>
+        </div>
+
+        <div class="col-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-10">
+        <h1>All Clinic Receptionists</h1>
+    </div>
+    <div class="col-2">
+        <a href="/Admin/CuraHub/Clinic/ClinicReceptionist/Create" class="btn btn-secondary"><i class="bi bi-plus-circle"></i> Add New Clinic Receptionist</a>
+    </div>
+</div>
+<br />
+
+
+<table class="table" style="border:solid">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col" style="text-align:center">ID</th>
+            <th scope="col" style="text-align:center">Name</th>
+            <th scope="col" style="text-align:center">Phone</th>
+            <th scope="col" style="text-align:center">ProfilePicture</th>
+            <th scope="col" style="text-align:center">Personal National ID Number</th>
+            <th scope="col" style="text-align:center">Personal National ID Card</th>
+            <th scope="col" style="text-align:center">Doctor Name</th>
+            <th scope="col" style="text-align:center">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="border:solid">
+                <th scope="row" style="border:solid">@item.Id</th>
+                <th scope="row" style="border:solid">@item.FirstName @item.LastName</th>
+                <th scope="row" style="border:solid">@item.Phone</th>
+                <th scope="row" style="border:solid;text-align:center"> <img src="~/Files/Images/ClinicReceptionistPicture/@item.ProfilePicture" alt="Alternate Text" /> </th>
+                <th scope="row" style="border:solid;text-align:center">@item.PersonalNationalIDNumber</th>
+                <th scope="row" style="border:solid;text-align:center"> <a href="~/Files/PersonalNationalIDCard/@item.PersonalNationalIDCard" alt="Alternate Text"> Card </a></th>
+
+                <th scope="row" style="border:solid">@item.Doctor.FirstName @item.Doctor.LastName</th>
+
+                <td>
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-primary">Action</button>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <a class="dropdown-item" href="/Admin/Actor/Edit?ActorId=@item.Id">Edit</a>
+                                <a class="dropdown-item" href="/Admin/Actor/Delete?ActorId=@item.Id" onclick="return confirm('are you sure?')">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex flex-row-reverse">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            @for (int i = 1; i <= (Model.Count() + 4) / 5; i++)
+            {
+
+                <li class="page-item"><a class="page-link " href="/Admin/Actor/Index?PageNumber=@i">@i</a></li>
+
+            }
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+
+
+</div>
+
+
