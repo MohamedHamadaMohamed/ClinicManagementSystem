@@ -18,7 +18,7 @@ namespace CMS.Perestation.Layer.DbInitilization
             this._roleManager = roleManager;
             this._dbContext = dbContext;
         }
-        public void Initilizer()
+        public async void Initilizer()
         {
             try
             {
@@ -42,14 +42,15 @@ namespace CMS.Perestation.Layer.DbInitilization
             {
                 this._userManager.CreateAsync(new()
                 {
-                    UserName ="Admin",
+                    UserName = "Admin",
                     Email = "Admin@gmail.com",
                     FirstName = "Admin",
-                    LastName = "Admin" ,
+                    LastName = "Admin",
                     ProfilePicture = "Admin.jpg",
                     PhoneNumber = "+201023456789"
 
-                }, "@Admin123");
+                }, "@Admin123").GetAwaiter().GetResult();
+                this._userManager.AddToRoleAsync(_userManager.FindByEmailAsync("Admin@gmail.com").GetAwaiter().GetResult(), Role.AdminRole);
             }
 
         }

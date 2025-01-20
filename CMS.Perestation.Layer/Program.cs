@@ -60,9 +60,9 @@ namespace CMS.Perestation.Layer
 
             app.UseAuthorization();
 
-            //var scope = app.Services.CreateScope();
-            //var service = scope.ServiceProvider.GetService<IDbInitilizer>();
-            //service.Initilizer();
+            var scope = app.Services.CreateScope();
+            var service = scope.ServiceProvider.GetService<IDbInitilizer>();
+            service.Initilizer();
 
             app.MapStaticAssets();
 
