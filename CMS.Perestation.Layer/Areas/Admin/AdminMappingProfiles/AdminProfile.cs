@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CMS.Models.CuraHub.IdentitySection.IdentitySectionVM;
+using CMS.Models.CuraHub.IdentitySection;
 
 namespace CMS.Perestation.Layer.Areas.Admin.AdminMappingProfiles
 {
@@ -6,7 +8,7 @@ namespace CMS.Perestation.Layer.Areas.Admin.AdminMappingProfiles
     {
         public AdminProfile()
         {
-            
+            CreateMap<ApplicationUser, ApplicationUserVM>().ReverseMap();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CMS.Data.Access.Layer.Data;
 using CMS.Models.CuraHub.IdentitySection;
-using CMS.Utitlities.Utilities;
+using CMS.Utitlities.StaticData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CMS.Utitlities.Utilities
+namespace CMS.Utitlities.StaticData
 {
     public static class MaritalStatus
     {
