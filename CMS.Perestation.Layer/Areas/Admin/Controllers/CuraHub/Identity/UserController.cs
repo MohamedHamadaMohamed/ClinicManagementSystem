@@ -71,32 +71,34 @@ namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Identity
             }
             return RedirectToAction("Index", "User", new { area = "Admin" });
         }
+        [HttpGet]
+        [Route("RoleManagement")]
+        public async Task<IActionResult> RoleManagement(string UserId)
+        {
+            var user = await _userManager.FindByIdAsync(UserId);
+            if (user is not null)
+            {
+                var roles = _roleManager.Roles.ToList();
+                UserRoleVM userRoleVM = new UserRoleVM();
+                userRoleVM.Roles = roles;
+                userRoleVM.User = user;
+                return View(userRoleVM);
+            }
+            return View(user);
+        }
+        [HttpPost]
+        [Route("RoleManagement")]
+        public async Task<IActionResult> RoleManagement(string UserId, string RoleId)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(UserId);
+                var role = await _roleManager.FindByIdAsync(RoleId);
+                await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
+                await _userManager.AddToRoleAsync(user, role.Name);
 
-        //public async Task<IActionResult> RoleManagement(string UserId)
-        //{
-        //    var user = await _userManager.FindByIdAsync(UserId);
-        //    if (user is not null)
-        //    {
-        //        var roles = _roleManager.Roles.ToList();
-        //        UserRoleVM userRoleVM = new UserRoleVM();
-        //        userRoleVM.Roles = roles;
-        //        userRoleVM.User = user;
-        //        return View(userRoleVM);
-        //    }
-        //    return View(user);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> RoleManagement(string UserId, string RoleId)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.FindByIdAsync(UserId);
-        //        var role = await _roleManager.FindByIdAsync(RoleId);
-        //        await _userManager.RemoveFromRolesAsync(user, await _userManager.GetRolesAsync(user));
-        //        await _userManager.AddToRoleAsync(user, role.Name);
-
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

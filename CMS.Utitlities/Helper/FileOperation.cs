@@ -22,7 +22,7 @@ namespace CMS.Utitlities.Helper
         public static void DeleteFile(string fileName, string FolderPath)
         {
             var oldPath = Path.Combine(Directory.GetCurrentDirectory(), "./wwwroot\\Files", FolderPath, fileName);
-            if (System.IO.File.Exists(oldPath))
+            if (System.IO.File.Exists(oldPath) )
             {
                 System.IO.File.Delete(oldPath);
             }

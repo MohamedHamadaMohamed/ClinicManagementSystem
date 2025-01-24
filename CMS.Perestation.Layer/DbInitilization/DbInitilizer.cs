@@ -1,4 +1,5 @@
 ﻿using CMS.Data.Access.Layer.Data;
+using CMS.Data.Access.Layer.Repository.IRepository;
 using CMS.Models.CuraHub.IdentitySection;
 using CMS.Utitlities.StaticData;
 using Microsoft.AspNetCore.Identity;
@@ -10,13 +11,15 @@ namespace CMS.Perestation.Layer.DbInitilization
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ApplicationDbContext _dbContext;
 
-        public DbInitilizer(UserManager<ApplicationUser> userManager , RoleManager<IdentityRole> roleManager,ApplicationDbContext dbContext) 
+        public DbInitilizer(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager , RoleManager<IdentityRole> roleManager,ApplicationDbContext dbContext) 
         {
             this._userManager = userManager;
             this._roleManager = roleManager;
             this._dbContext = dbContext;
+            this._unitOfWork = unitOfWork;
         }
         public async void Initilizer()
         {
@@ -52,6 +55,7 @@ namespace CMS.Perestation.Layer.DbInitilization
                 }, "@Admin123").GetAwaiter().GetResult();
                 this._userManager.AddToRoleAsync(_userManager.FindByEmailAsync("Admin@gmail.com").GetAwaiter().GetResult(), Role.AdminRole);
             }
+            
 
         }
     }

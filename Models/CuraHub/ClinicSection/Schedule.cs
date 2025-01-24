@@ -9,7 +9,6 @@ namespace CMS.Models.CuraHub.ClinicSection
     public class Schedule
     {
         public int Id { get; set; }
-        public DateOnly date { get; set; }
         public DayOfWeek Day { get; set; }
 
         public TimeOnly Appointment { get; set; } 
@@ -18,7 +17,7 @@ namespace CMS.Models.CuraHub.ClinicSection
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; } = null!;
 
-        public ICollection<PatientAppointment> PatientAppointments { get; set; }
+        public ICollection<PatientAppointment>? PatientAppointments { get; set; }
 
     }
 }

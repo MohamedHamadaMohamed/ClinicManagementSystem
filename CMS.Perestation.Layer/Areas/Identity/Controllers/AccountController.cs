@@ -6,6 +6,7 @@ using CMS.Utitlities.Helper;
 using CMS.Utitlities.StaticData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace CMS.Perestation.Layer.Areas.Identity.Controllers
@@ -120,6 +121,52 @@ namespace CMS.Perestation.Layer.Areas.Identity.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home", new { area = "Home" });
         }
+        [HttpGet]
+        [Route("Profile")]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            ProfileVM profileVM = new ProfileVM();
+            if (user is not null)
+            {
+                profileVM = _mapper.Map<ProfileVM>(user);
+                return View(profileVM);
+            }
+            return RedirectToAction("Login", "Account", new { area = "Identity" });
 
+        }
+        [HttpPost]
+        [Route("Profile")]
+        public async Task<IActionResult> Profile(ProfileVM profileVM, IFormFile file)
+        {
+            var oldProfile = await _userManager.GetUserAsync(User);
+            if (oldProfile != null)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    profileVM.ProfilePicture = FileOperation.UploadFile(file, "Images\\Profiles");
+                    if (oldProfile.ProfilePicture != "Profile.png")
+                    {
+                        FileOperation.DeleteFile(oldProfile.ProfilePicture, "Images\\Profiles");
+                    }
+                }
+                else
+                {
+                    profileVM.ProfilePicture = oldProfile.ProfilePicture;
+                }
+
+                oldProfile.FirstName = profileVM.FirstName;
+                oldProfile.LastName = profileVM.LastName;
+                oldProfile.ProfilePicture = profileVM.ProfilePicture;
+
+                await _userManager.UpdateAsync(oldProfile);
+                
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
+            return View(profileVM);
+        }
     }
 }

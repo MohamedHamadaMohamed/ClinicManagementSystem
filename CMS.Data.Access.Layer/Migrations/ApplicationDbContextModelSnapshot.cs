@@ -415,6 +415,9 @@ namespace CMS.Data.Access.Layer.Migrations
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
+                    b.Property<DateOnly>("date")
+                        .HasColumnType("date");
+
                     b.HasKey("PatientId", "ScheduleId");
 
                     b.HasIndex("ScheduleId");
@@ -783,9 +786,6 @@ namespace CMS.Data.Access.Layer.Migrations
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
-
-                    b.Property<DateOnly>("date")
-                        .HasColumnType("date");
 
                     b.HasKey("Id");
 

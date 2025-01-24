@@ -2,9 +2,9 @@ using CMS.Perestation.Layer.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CMS.Perestation.Layer.Areas.Home.Controllers
+namespace CMS.Perestation.Layer.Areas.Customer.Controllers
 {
-    [Area(nameof(Home))]
+    [Area(nameof(Customer))]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

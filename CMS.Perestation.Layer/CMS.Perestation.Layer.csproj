@@ -18,14 +18,10 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Customer\Controllers\CuraHub\MedicalAnalysis\" />
-    <Folder Include="Areas\Customer\Controllers\CuraHub\Clinic\" />
     <Folder Include="Areas\Customer\Controllers\CuraHub\Q&amp;A\" />
     <Folder Include="Areas\Customer\Controllers\CuraHub\Pharmacy\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Customer\Models\" />
-    <Folder Include="Areas\Customer\Views\" />
-    <Folder Include="Areas\Home\Data\" />
-    <Folder Include="Areas\Home\Models\" />
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Areas\Identity\Models\" />
     <Folder Include="Areas\Staff\Controllers\CuraHub\Clinic\" />
@@ -35,10 +31,7 @@
     <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Areas\Staff\Models\" />
     <Folder Include="Areas\Staff\Views\" />
-    <Folder Include="wwwroot\Files\Images\ClinicReceptionistPictures\" />
-    <Folder Include="wwwroot\Files\Images\DoctorsPictures\" />
     <Folder Include="wwwroot\Files\Images\PatientPictures\" />
-    <Folder Include="wwwroot\Files\PersonalNationalIDCard\" />
   </ItemGroup>
 
   <ItemGroup>

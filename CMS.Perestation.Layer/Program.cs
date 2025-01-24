@@ -70,7 +70,7 @@ namespace CMS.Perestation.Layer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Home}/{controller=Home}/{action=Index}/{id?}")
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

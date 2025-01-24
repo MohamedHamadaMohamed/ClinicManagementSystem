@@ -9,6 +9,8 @@ namespace CMS.Models.CuraHub.ClinicSection
     public class PatientAppointment
     {
 
+        public DateOnly date { get; set; }
+
         public int PatientId { get; set; }
 
         public Patient Patient { get; set; } = null!;
