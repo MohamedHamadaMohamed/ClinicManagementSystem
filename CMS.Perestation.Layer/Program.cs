@@ -6,6 +6,7 @@ using CMS.Data.Access.Layer.Repository.IRepository;
 //using CMS.Data.Access.Layer.Repository.IRepository;
 using CMS.Models.CuraHub.IdentitySection;
 using CMS.Perestation.Layer.DbInitilization;
+using CMS.Utitlities.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,8 @@ namespace CMS.Perestation.Layer
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IDbInitilizer, DbInitilizer>();
 
+
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             // builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             //StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
@@ -73,7 +76,7 @@ namespace CMS.Perestation.Layer
                 pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
-            app.Run();
+            app.Run(); 
         }
     }
 }

@@ -290,6 +290,9 @@ namespace CMS.Data.Access.Layer.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("userRatingCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SpecializationId");
@@ -404,7 +407,7 @@ namespace CMS.Data.Access.Layer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patient", "Clinic");
+                    b.ToTable("Patients", "Clinic");
                 });
 
             modelBuilder.Entity("CMS.Models.CuraHub.ClinicSection.PatientAppointment", b =>
@@ -449,7 +452,7 @@ namespace CMS.Data.Access.Layer.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Patients", "Clinic");
+                    b.ToTable("PatientHistories", "Clinic");
                 });
 
             modelBuilder.Entity("CMS.Models.CuraHub.ClinicSection.Qualification", b =>
@@ -1738,12 +1741,6 @@ namespace CMS.Data.Access.Layer.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 

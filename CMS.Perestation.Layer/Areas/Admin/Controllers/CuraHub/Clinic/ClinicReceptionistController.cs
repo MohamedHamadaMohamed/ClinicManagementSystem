@@ -3,10 +3,15 @@ using CMS.Data.Access.Layer.Repository.IRepository;
 using CMS.Models.CuraHub.ClinicSection;
 using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM;
 using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ClinicReceptionistVM;
+using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ScheduleVM;
+using CMS.Models.CuraHub.IdentitySection;
 using CMS.Utitlities.Helper;
+using CMS.Utitlities.StaticData;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using System.Numerics;
 
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
@@ -17,10 +22,14 @@ namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public ClinicReceptionistController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ClinicReceptionistController(IUnitOfWork unitOfWork, IMapper mapper , UserManager<ApplicationUser> userManager)
         {
             this._unitOfWork = unitOfWork;
             this._mapper = mapper;
+            this._userManager = userManager;
+
         }
         [Route("Index")]
         public IActionResult Index(string? query = null, int PageNumber = 1, int? DoctorId = null)
@@ -115,6 +124,22 @@ namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 
                 _unitOfWork.ClinicReceptionistRepository.Create(clinicReceptionist);
                 _unitOfWork.Commit();
+
+                var savedClinicReceptionist = _unitOfWork.ClinicReceptionistRepository.RetriveItem(filter: e => e.PersonalNationalIDNumber == clinicReceptionist.PersonalNationalIDNumber);
+
+                if (savedClinicReceptionist != null)
+                {
+                    // Change Role to Doctor
+                    var user = _userManager.FindByIdAsync(savedClinicReceptionist.ApplicationUserId).GetAwaiter().GetResult();
+                    if (user != null)
+                    {
+                        _userManager.RemoveFromRolesAsync(user, _userManager.GetRolesAsync(user).GetAwaiter().GetResult()).GetAwaiter().GetResult();
+                        _userManager.AddToRoleAsync(user, Role.ClinicReceptionistRole).GetAwaiter().GetResult();
+                    }
+                }
+
+
+
                 return RedirectToAction(nameof(Index));
 
             }

@@ -15,7 +15,7 @@ namespace CMS.Models.CuraHub.ClinicSection
         public string PersonalNationalIDNumber { get; set; } = null!;
         public string PersonalNationalIDCard { get; set; } = null!;
 
-        [RegularExpression("^(A+|A-|B+|B-|AB+|AB-|O+|O-)$", ErrorMessage = "Blood Type must be 'A+','A-','B+','B-','AB+','AB-','O+','O-'")]
+        //[RegularExpression("^(A+|A-|B+|B-|AB+|AB-|O+|O-)$", ErrorMessage = "Blood Type must be 'A+','A-','B+','B-','AB+','AB-','O+','O-'")]
         public string? BloodType { get; set; }
         public string? MedicalAnalysis { get; set; }
 
