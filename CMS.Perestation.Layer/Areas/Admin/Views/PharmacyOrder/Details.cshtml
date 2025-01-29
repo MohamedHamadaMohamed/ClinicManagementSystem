@@ -5,15 +5,8 @@
 
 @{
     ViewData["Title"] = "Pharmacy Order Details";
-    Layout = "~/Views/Shared/_PharmacyLayout.cshtml";
-
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+
 <div class="container mt-5">
     <h2>@ViewData["Title"]</h2>
     <div class="card shadow p-4 rounded">
@@ -32,9 +25,6 @@
         <div class="mt-4">
             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
             <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-            <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
         </div>
     </div>
 </div>

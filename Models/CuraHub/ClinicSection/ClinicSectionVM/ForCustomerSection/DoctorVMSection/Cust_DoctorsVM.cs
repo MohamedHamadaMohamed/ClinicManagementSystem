@@ -15,5 +15,16 @@ namespace CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ForCustomerSection.Do
         public int TotalDoctorCount {  get; set; }
         public int CurrentPage { get; set; }
 
+
+        public string? State { get; set; } = null;
+        public string? City { get; set; } = null;
+        public int? SpecializationId { get; set; } = null;
+        public string? query {  get; set; }= null;
+        public string? Title { get; set; } = null;
+
+        public int? Rate { get; set; } = null;
+        public int? ConsultationFees { get; set; } = null;
+        public string? Gender { get; set; } = null;
+
     }
 }

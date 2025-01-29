@@ -72,127 +72,147 @@
     
     
     <div class="row">
-        <div class="col-md-2 bg-dark text-white min-vh-100">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col-md-2 bg-dark text-white min-vh-100">
 
-            <br />
+                <br />
 
-            <br />
+                <br />
 
-            <br />
+                <br />
 
-            <div class="">
+                <div class="">
 
-                <h3 class="text-center mt-3">Dashboard</h3>
+                    <h3 class="text-center mt-3">Dashboard</h3>
 
-                <ul class="nav flex-column">
+                    <ul class="nav flex-column">
 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <a class="nav-link" href="/Customer/Home/Index"><i class="bi bi-house-fill"></i> Home</a>
+                            <a class="nav-link" href="/Customer/Home/Index"><i class="bi bi-house-fill"></i> Home</a>
 
-                        <hr />
+                            <hr />
 
-                    </li>
+                        </li>
 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <!-- إضافة سهم وقائمة منسدلة -->
+                            <!-- إضافة سهم وقائمة منسدلة -->
 
-                        <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#identityCollapse" id="identityHeader">
+                            <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#identityCollapse" id="identityHeader">
 
-                            Identity <i class="fas fa-chevron-down float-end" id="identityArrow"></i>
+                                Identity <i class="fas fa-chevron-down float-end" id="identityArrow"></i>
 
-                        </h6>
+                            </h6>
 
-                        <div class="collapse" id="identityCollapse">
+                            <div class="collapse" id="identityCollapse">
 
-                            <a class="nav-link" href="/Admin/CuraHub/Identity/User/Index"><i class="bi bi-person-circle"></i> Users</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Identity/User/Index"><i class="bi bi-person-circle"></i> Users</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Identity/Role/Index"><i class="bi bi-border-width"></i> Roles</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Identity/Role/Index"><i class="bi bi-border-width"></i> Roles</a>
 
-                        </div>
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                    </li>
+                        </li>
 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <!-- إضافة سهم وقائمة منسدلة -->
+                            <!-- إضافة سهم وقائمة منسدلة -->
 
-                        <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#clinicCollapse" id="clinicHeader">
+                            <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#clinicCollapse" id="clinicHeader">
 
-                            Clinic <i class="fas fa-chevron-down float-end" id="clinicArrow"></i>
+                                Clinic <i class="fas fa-chevron-down float-end" id="clinicArrow"></i>
 
-                        </h6>
+                            </h6>
 
-                        <div class="collapse" id="clinicCollapse">
+                            <div class="collapse" id="clinicCollapse">
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/Doctor/Index"><i class="bi bi-heart-pulse"></i> Doctors</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Doctor/Index"><i class="bi bi-heart-pulse"></i> Doctors</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/Patient/Index"><i class="fas fa-user-injured fa-1x"></i> Patients</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Patient/Index"><i class="fas fa-user-injured fa-1x"></i> Patients</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/ClinicReceptionist/Index"><i class="bi bi-receipt-cutoff"></i> Receptionists</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/ClinicReceptionist/Index"><i class="bi bi-receipt-cutoff"></i> Receptionists</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/Specialization/Index"><i class="fas fa-user-md fa-1x"></i> Specializations</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Specialization/Index"><i class="fas fa-user-md fa-1x"></i> Specializations</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/Qualification/Index"><i class="bi bi-layers-fill"></i> Qualifications</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Qualification/Index"><i class="bi bi-layers-fill"></i> Qualifications</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/RequestDoctor/Index"><i class="bi bi-heart-pulse-fill"></i> Request Doctors</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/RequestDoctor/Index"><i class="bi bi-heart-pulse-fill"></i> Request Doctors</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Clinic/RequestClinicReceptionist/Index"><i class="bi bi-reception-2"></i> Request Receptionists</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/RequestClinicReceptionist/Index"><i class="bi bi-reception-2"></i> Request Receptionists</a>
 
-                        </div>
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                    </li>
+                        </li>
 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <!-- إضافة سهم وقائمة منسدلة -->
+                            <!-- إضافة سهم وقائمة منسدلة -->
 
-                        <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#pharmacyCollapse" id="pharmacyHeader">
+                            <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#pharmacyCollapse" id="pharmacyHeader">
 
-                            Pharmacy <i class="fas fa-chevron-down float-end" id="pharmacyArrow"></i>
+                                Pharmacy <i class="fas fa-chevron-down float-end" id="pharmacyArrow"></i>
 
-                        </h6>
+                            </h6>
 
-                        <div class="collapse" id="pharmacyCollapse">
+                            <div class="collapse" id="pharmacyCollapse">
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/Medicine/Index"><i class="fas fa-prescription-bottle fa-1x"></i>Medicines</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/Medicine/Index"><i class="fas fa-prescription-bottle fa-1x"></i>Medicines</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyCategory/Index">Categories</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyCategory/Index">Categories</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/MedicineManufactory/Index">Manufactories</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/MedicineManufactory/Index">Manufactories</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/Pharmacist/Index">Pharmacists</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/Pharmacist/Index">Pharmacists</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyOrder/Index">Orders</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyOrder/Index">Orders</a>
 
-                            <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyDeliveryRepresentative/Index">Delivery Representatives</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyDeliveryRepresentative/Index">Delivery Representatives</a>
 
-                        </div>
+                                <a class="nav-link" href="/Admin/CuraHub/Pharmacy/PharmacyCustomer/Index">Pharmacy Customers</a>
 
-                        <hr />
+                            </div>
 
-                    </li>
+                            <hr />
 
-                </ul>
+                        </li>
 
-            </div>
+                    </ul>
 
-        </div>
-        <div class="col-md-10">
-            <div class="hero-section">
-                <div class="container">
-                    <main role="main" class="pb-3">
-                        @RenderBody()
-                    </main>
                 </div>
+
+            </div>
+            <div class="col-md-10">
+                <div class="hero-section">
+                    <div class="container">
+                        <main role="main" class="pb-3">
+                            @RenderBody()
+                        </main>
+                    </div>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <div class="hero-section">
+                    <div class="container">
+                        <main role="main" class="pb-3">
+                            @RenderBody()
+                        </main>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
+        }
+      
     </div>
     
     <!-- Features Section -->
@@ -286,9 +306,7 @@
 
                     // إضافة aria-controls
                     header.setAttribute("aria-controls", collapseTarget.id);
-                } else {
-                    console.error("لم يتم العثور على أحد العناصر المطلوبة في القائمة المنسدلة.");
-                }
+                } 
             });
         });
 

@@ -1,7 +1,7 @@
-﻿@model CMS.Models.CuraHub.PharmacySection.PharmacySectionVM.PharmacyDeliveryRepresentativeVM
+﻿@model CMS.Models.CuraHub.PharmacySection.PharmacySectionVM.PharmacyCustomerVM
 
 <div class="container mt-5">
-    <h2>Pharmacist @Model.FirstName Details</h2>
+    <h2>Customer @Model.FirstName @Model.LastName Details</h2>
     <div class="card shadow-lg p-4 rounded">
         <div class="row mb-4">
             <div class="col-md-12">
@@ -47,21 +47,6 @@
                     <dd class="col-sm-9">
                         <img src="~/Files/Images/@Model.PersonalNationalIDCard" alt="Profile Picture" class="img-fluid" style="max-width:200px; max-height:200px;" />
                     </dd>
-
-                    <dt class="col-sm-3 font-weight-bold">Marital Status</dt>
-                    <dd class="col-sm-9">@Model.MaritalStatus</dd>
-
-                    <dt class="col-sm-3 font-weight-bold">Start Work</dt>
-                    <dd class="col-sm-9">@Model.StartWork</dd>
-
-                    <dt class="col-sm-3 font-weight-bold">End Work</dt>
-                    <dd class="col-sm-9">@Model.EndWork</dd>
-
-                    <dt class="col-sm-3 font-weight-bold">Application User ID</dt>
-                    <dd class="col-sm-9">@Model.ApplicationUserId</dd>
-
-                    <dt class="col-sm-3 font-weight-bold">Salary</dt>
-                    <dd class="col-sm-9">@Model.Salary</dd>
                 </dl>
             </div>
         </div>

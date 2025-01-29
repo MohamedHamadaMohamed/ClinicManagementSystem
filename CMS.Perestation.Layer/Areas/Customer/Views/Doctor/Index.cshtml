@@ -35,7 +35,7 @@
             </div>
             <div class="col-12 mt-2">
                 <div class="mb-3">
-                    <input type="text" class="form-control" name="query" id="SearchInput" placeholder="Search By Doctor Name">
+                    <input type="text" class="form-control" name="query" id="SearchInput" value="@Model.query" placeholder="Search By Doctor Name">
                 </div>
             </div>
             <div class="col-12 mt-2">
@@ -43,7 +43,16 @@
                     <option selected>Select speciality</option>
                     @foreach (var specialization in Model.Specializations)
                     {
-                        <option value="@specialization.Id">@specialization.Name</option>
+                        if(Model.SpecializationId == specialization.Id)
+                        {
+                            <option selected value="@specialization.Id">@specialization.Name</option>
+
+                        }
+                        else
+                        {
+                           <option value="@specialization.Id">@specialization.Name</option>
+                    
+                        }
                     }
 
                 </select>
