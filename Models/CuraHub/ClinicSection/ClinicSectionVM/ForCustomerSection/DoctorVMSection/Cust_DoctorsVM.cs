@@ -26,5 +26,10 @@ namespace CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ForCustomerSection.Do
         public int? ConsultationFees { get; set; } = null;
         public string? Gender { get; set; } = null;
 
+        public Cust_DoctorsVM()
+        {
+            Rate = 0;
+            ConsultationFees = 1000;
+        }
     }
 }

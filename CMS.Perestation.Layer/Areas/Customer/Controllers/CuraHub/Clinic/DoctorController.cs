@@ -77,22 +77,16 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
 
             if (Rate != null)
             {
-                doctors = doctors.Where(e => ((e.Rate <= Rate) && (e.Rate >= Rate)));
+                doctors = doctors.Where(e => ((e.Rate >= Rate)));
                 cust_DoctorsVM.Rate = Rate;
             }
             if (ConsultationFees != null)
             {
                 cust_DoctorsVM.ConsultationFees = ConsultationFees;
-                if (ConsultationFees != 401)
-                {
-                    doctors = doctors.Where(e => ((e.ConsultationFees <= ConsultationFees) && (e.ConsultationFees >= ConsultationFees)));
+              
+                doctors = doctors.Where(e => ((e.ConsultationFees <= ConsultationFees)));
 
-                }
-                else
-                {
-                    doctors = doctors.Where(e => ((e.ConsultationFees >= ConsultationFees)));
-
-                }
+                
             }
 
             cust_DoctorsVM.TotalDoctorCount = doctors.Count();

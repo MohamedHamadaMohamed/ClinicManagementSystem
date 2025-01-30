@@ -1,4 +1,5 @@
 ﻿@using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ForCustomerSection.DoctorVMSection
+@using CMS.Utitlities.StaticData
 
 @{
     ViewData["Title"] = "Index";
@@ -8,7 +9,7 @@
 @{
     var cities = new Dictionary<string, List<string>>(); // Use a dictionary to store cities for each state
     List<string> titles = ["Professor", "Lecturer", "Consultant", "Specialist"];
-
+    var states = State.States;
 
     // Assuming you have a method to retrieve cities based on state
     cities.Add("Cairo", new List<string>() { "Nasr City", "October City", "Giza", "Heliopolis" });
@@ -30,111 +31,113 @@
     <div class="col-3">
         <!-- Filter Section -->
         <div class="filter-section rounded-2">
-            <div class="card-header">
-                <h3 class="text-bg-danger rounded-2">Filters</h3>
-            </div>
-            <div class="col-12 mt-2">
-                <div class="mb-3">
-                    <input type="text" class="form-control" name="query" id="SearchInput" value="@Model.query" placeholder="Search By Doctor Name">
+                <div class="card-header">
+                    <h3 class="text-bg-danger rounded-2">Filters</h3>
                 </div>
-            </div>
-            <div class="col-12 mt-2">
-                <select class="form-select" name="SpecializationId" aria-label="Default select example">
-                    <option selected>Select speciality</option>
-                    @foreach (var specialization in Model.Specializations)
-                    {
-                        if(Model.SpecializationId == specialization.Id)
+                      <form action="/Customer/CuraHub/Clinic/Doctor/Index" >
+
+                            <div class="col-12 mt-2">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="query" id="SearchInput" value="@Model.query" placeholder="Search By Doctor Name">
+                    </div>
+                </div>
+                            <div class="col-12 mt-2">
+                    <select class="form-select" name="SpecializationId" aria-label="Default select example">
+                        <option selected>Select speciality</option>
+                        @foreach (var specialization in Model.Specializations)
                         {
-                            <option selected value="@specialization.Id">@specialization.Name</option>
+                            if (Model.SpecializationId == specialization.Id)
+                            {
+                                <option selected value="@specialization.Id">@specialization.Name</option>
+
+                            }
+                            else
+                            {
+                                <option value="@specialization.Id">@specialization.Name</option>
+
+                            }
+                        }
+
+                    </select>
+
+                </div>
+                            <div class="col-12 mt-2">
+
+
+                    <select class="form-select" id="mySelect" aria-label="Default select example ">
+                        <option value="@null" selected>Select State</option>
+                    @foreach (var state in states)
+                    {
+                        if (Model.State == state)
+                        {
+                                <option selected value="@state">@state</option>
 
                         }
                         else
                         {
-                           <option value="@specialization.Id">@specialization.Name</option>
-                    
+                                <option value="@state">@state</option>
                         }
                     }
 
-                </select>
+                    </select>
 
-            </div>
-            <div class="col-12 mt-2">
-                <select class="form-select" id="mySelect" aria-label="Default select example">
-                    <option selected>Select State</option>
-                    <option value="Alexandria">Alexandria</option>
-                    <option value="Aswan">Aswan</option>
-                    <option value="Asyut">Asyut</option>
-                    <option value="Beheira">Beheira</option>
-                    <option value="Beni Suef">Beni Suef</option>
-                    <option value="Cairo">Cairo</option>
-                    <option value="Dakahlia">Dakahlia</option>
-                    <option value="Damietta">Damietta</option>
-                    <option value="Faiyum">Faiyum</option>
-                    <option value="Gharbia">Gharbia</option>
-                    <option value="Giza">Giza</option>
-                    <option value="Ismailia">Ismailia</option>
-                    <option value="Kafr el-Sheikh">Kafr el-Sheikh</option>
-                    <option value="Luxor">Luxor</option>
-                    <option value="Matrouh">Matrouh</option>
-                    <option value="Minya">Minya</option>
-                    <option value="Monufia">Monufia</option>
-                    <option value="New Valley">New Valley</option>
-                    <option value="North Sinai">North Sinai</option>
-                    <option value="Port Said">Port Said</option>
-                    <option value="Qalyubia">Qalyubia</option>
-                    <option value="Qena">Qena</option>
-                    <option value="Red Sea">Red Sea</option>
-                    <option value="Sohag">Sohag</option>
-                    <option value="South Sinai">South Sinai</option>
-                    <option value="Suez">Suez</option>
-                    <option value="Sharqia">Sharqia</option>
-                </select>
+                </div>
 
-            </div>
+                            <div class="col-12 mt-2">
+                                 <select class="form-select" id="regionSelect" aria-label="Default select example">
+                                        <option selected>Select Region</option>
 
-            <div class="col-12 mt-2">
-                <select class="form-select" id="regionSelect" aria-label="Default select example">
-                    <option selected>Select Region</option>
+                                </select>
 
-                </select>
+                            </div>
 
-            </div>
+                            <div class="col-12 mt-2">
 
-            <div class="col-12 mt-2">
-
-                <select class="form-select" name="Title" aria-label="Default select example">
-                    <option value="@null" selected>Select Title</option>
+                    <select class="form-select" name="Title" aria-label="Default select example">
+                        <option value="@null" selected>Select Title</option>
                     @foreach (var title in titles)
                     {
-                        <option value="@title">@title</option>
+                        if (Model.Title == title)
+                        {
+                                <option selected value="@title">@title</option>
+
+                        }
+                        else
+                        {
+                                <option value="@title">@title</option>
+                        }
                     }
 
-                </select>
-            </div>
-            <div class="col-12 mt-2">
-                <select class="form-select" required="" name="Gender" id="Gender" aria-label="Default select example">
-                    <option selected disabled>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    </select>
+                </div>
+                            <div class="col-12 mt-2">
+                    <select class="form-select" required="" name="Gender" id="Gender" aria-label="Default select example">
+                        <option selected disabled>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
 
 
-                </select>
+                    </select>
 
-            </div>
+                </div>
 
-            <div class="col-12 mt-2 bg-white bg-opacity-75 text-black">
-                <label class=" text-start d-block">Consultation Fees</label>
-                <input type="range" id="myRange" min="10" step="10" max="1000" value="50" class=" text-start d-block" name="ConsultationFees">
-                <span id="rangeValue" class=" text-start d-block">50 EGP</span>
-            </div>
+                             <div class="col-12 mt-2 bg-white bg-opacity-75 text-black">
+                    <label class=" text-start d-block">Consultation Fees</label>
+                    <input type="range" id="myRange" min="10" step="10" max="1000" value="@Model.ConsultationFees" class=" text-start d-block" name="ConsultationFees">
+                    <span id="rangeValue" class=" text-start d-block">@Model.ConsultationFees EGP</span>
+                </div>
 
-            <div class="col-12 mt-2 bg-white bg-opacity-75 text-black">
-                <label class=" text-start d-block">Rate</label>
-                <input type="range" id="myRate" min="0" step="1" max="5" value="0" class=" text-start d-block" name="Rate">
-                <span id="rateValue" class=" text-start d-block">0</span>
-            </div>
+                             <div class="col-12 mt-2 bg-white bg-opacity-75 text-black">
+                    <label class=" text-start d-block">Rate</label>
+                    <input type="range" id="myRate" min="0" step="1" max="5" value="@Model.Rate" class=" text-start d-block" name="Rate">
+                    <span id="rateValue" class=" text-start d-block">@Model.Rate</span>
+                </div>
+      
+                      <div class="row">
+                             <button type="submit" class="btn btn-primary">Search</button>
 
-
+                      </div>
+                      </form>
         </div>
     </div>
     <div class="col-9">
