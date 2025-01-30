@@ -102,5 +102,6 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
 
             return View(cust_DoctorsVM);
         }
+      
     }
 }

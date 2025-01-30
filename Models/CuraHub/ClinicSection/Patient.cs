@@ -30,6 +30,8 @@ namespace CMS.Models.CuraHub.ClinicSection
         public List<PatientHistory>? Histories { get; set; }
         public List<PatientAppointment>? PatientAppointments { get; set; }
 
+        public string ApplicationUserId { get; set; } = null!;
+
 
 
 

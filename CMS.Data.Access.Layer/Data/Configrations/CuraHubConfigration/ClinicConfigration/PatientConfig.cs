@@ -91,6 +91,11 @@ namespace CMS.Data.Access.Layer.Data.Configrations.CuraHubConfigration.ClinicCon
                 .WithOne(e => e.Patient)
                 .HasForeignKey(e => e.PatientId);
 
+            builder.Property(e => e.ApplicationUserId)
+                .IsRequired()
+               .HasMaxLength(100)
+               .IsUnicode(true);
+
             builder.ToTable(name: "Patients", schema: "Clinic");
 
 

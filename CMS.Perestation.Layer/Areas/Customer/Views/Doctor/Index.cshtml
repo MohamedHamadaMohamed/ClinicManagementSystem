@@ -232,29 +232,34 @@
                                         </div>
                                         <div class="col-4 bg-light  m-0">
                                             <h6 style="font-size:initial" class="text-bg-primary rounded-2">@DateTime.Now.AddDays(2).Day / @DateTime.Now.AddDays(2).Month</h6>
-                                            <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
-                                                @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(2).DayOfWeek))
-                                                {
-                                                    @if (schedule.Available)
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                @schedule.Appointment
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                <s> @schedule.Appointment </s>
-                                                            </div>
-                                                        </div>
-                                                    }
+                                            <form id="bookingForm" action="/Customer/CuraHub/Clinic/Patient/Upsert">
 
-                                                }
-                                            </div>
-                                            <a class="btn btn-danger p-1 m-1 rounded-2">BOOK</a>
+                                            <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
+
+                                                    <input type="hidden" name="date" value="@DateTime.Now.AddDays(2).Date" />
+                                                    <input type="hidden" id="selectedAppointment" name="ScheduleId" />             
+                                                    @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(2).DayOfWeek))
+                                                    {
+                                                        @if (schedule.Available)
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id">
+                                                                    @schedule.Appointment
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id">
+                                                                    <s>@schedule.Appointment</s>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <button type="submit" class="btn btn-danger p-1 m-1 rounded-2">BOOK</button>
+                                            </form>
 
                                         </div>
                                     </div>
@@ -321,13 +326,20 @@
 </script>
 
 <script>
-    const options = document.querySelectorAll('.option');
+       const options = document.querySelectorAll('.option');
+    const selectedAppointmentInput = document.getElementById('selectedAppointment');
 
     options.forEach(option => {
-      option.addEventListener('click', () => {
-        options.forEach(o => o.classList.remove('selected'));
-        option.classList.add('selected');
-      });
+        option.addEventListener('click', () => {
+            // إزالة التحديد من جميع العناصر
+            options.forEach(o => o.classList.remove('selected'));
+
+            // إضافة التحديد للعنصر الذي تم النقر عليه
+            option.classList.add('selected');
+
+            // تحديث قيمة الحقل المخفي بالـ ScheduleId
+            selectedAppointmentInput.value = option.getAttribute('data-schedule-id');
+        });
     });
 </script>
 
