@@ -82,6 +82,14 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
                 {
                     patientAppointment.PatientId = savedPatient.Id;
                     this._unitOfWork.PatientAppointmentRepository.Create(patientAppointment);
+                    var schedul = this._unitOfWork.ScheduleRepository.RetriveItem(e => e.Id == patientAppointment.ScheduleId);
+                    if(schedul != null)
+                    {
+                        schedul.Available = false;
+                        this._unitOfWork.ScheduleRepository.Update(schedul);
+
+                    }
+
                     this._unitOfWork.Commit();
                 }
                 return RedirectToAction("Index", "Home");

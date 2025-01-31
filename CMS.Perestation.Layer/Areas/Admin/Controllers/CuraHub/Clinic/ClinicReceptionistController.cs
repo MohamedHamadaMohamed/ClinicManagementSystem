@@ -16,7 +16,7 @@ using System.Numerics;
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
     [Area(nameof(Admin))]
-    //[Authorize(Roles = ($"{Role.AdminRole}"))]
+    [Authorize(Roles = ($"{Role.AdminRole}"))]
     [Route("Admin/CuraHub/Clinic/ClinicReceptionist")]
     public class ClinicReceptionistController : Controller
     {

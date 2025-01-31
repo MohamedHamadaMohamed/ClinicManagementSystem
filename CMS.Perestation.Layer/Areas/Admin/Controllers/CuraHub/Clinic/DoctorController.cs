@@ -9,6 +9,7 @@ using CMS.Models.CuraHub.QuestionAndAnswerSection;
 using CMS.Models.Enums;
 using CMS.Utitlities.Helper;
 using CMS.Utitlities.StaticData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
@@ -20,7 +21,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
     [Area(nameof(Admin))]
-    //[Authorize(Roles = ($"{Role.AdminRole}"))]
+    [Authorize(Roles = ($"{Role.AdminRole}"))]
     [Route("Admin/CuraHub/Clinic/Doctor")]
     public class DoctorController : Controller
     {

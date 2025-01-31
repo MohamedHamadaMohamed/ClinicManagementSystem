@@ -9,11 +9,12 @@ using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.RequestClinicReceptionist
 using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ScheduleVM;
 using CMS.Utitlities.Helper;
 using CMS.Utitlities.StaticData;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
     [Area(nameof(Admin))]
-    //[Authorize(Roles = ($"{Role.AdminRole}"))]
+    [Authorize(Roles = ($"{Role.AdminRole}"))]
     [Route("Admin/CuraHub/Clinic/RequestClinicReceptionist")]
     public class RequestClinicReceptionistController : Controller
     {

@@ -1,4 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@using CMS.Models.CuraHub.IdentitySection
+@using CMS.Utitlities.StaticData
+@using Microsoft.AspNetCore.Identity
+@using CMS.Data.Access.Layer.Repository.IRepository
+
+
+@inject UserManager<ApplicationUser> _userManager
+@inject IUnitOfWork _unitOfWork
+
+@{
+    var user = await _userManager.GetUserAsync(User);
+    Doctor? doctor = null;
+    if (user != null)
+    {
+        doctor = _unitOfWork.DoctorRepository.RetriveItem(filter: e => e.ApplicationUserId == user.Id);
+
+    }
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,7 +45,7 @@
             background-size: cover;
             background-position: center center;
             background-attachment: fixed;
-
+            overflow-x: hidden;
         }
         .hero-section {
             /* height: 70vh; */
@@ -200,21 +218,86 @@
 
             </div>
         }
-        else
+        else if (User.IsInRole(Role.DoctorRole))
         {
-            <div class="col-md-12">
-                <div class="hero-section">
-                    <div class="container">
-                        <main role="main" class="pb-3">
-                            @RenderBody()
-                        </main>
-                    </div>
-                </div>
+        <div class="col-md-2 bg-dark text-white min-vh-100">
+
+            <br />
+
+            <br />
+
+            <br />
+
+            <div class="">
+
+                <h3 class="text-center mt-3">Dashboard</h3>
+
+                <ul class="nav flex-column">
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/Customer/Home/Index"><i class="bi bi-house-fill"></i> Home</a>
+
+                        <hr />
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <!-- إضافة سهم وقائمة منسدلة -->
+
+                        <h6 class="nav-link text-white dropdown-header" data-bs-toggle="collapse" data-bs-target="#clinicCollapse" id="clinicHeader">
+
+                            Clinic <i class="fas fa-chevron-down float-end" id="clinicArrow"></i>
+
+                        </h6>
+
+                        <div class="collapse" id="clinicCollapse">
+
+                                <a class="nav-link" href="/Staff/CuraHub/Clinic/Doctor/Info?DoctorId=@doctor?.Id"><i class="bi bi-info-circle"></i>  My Info</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Patient/Index"><i class="bi bi-people"></i> My Receptionists</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/PatientAppointment/Index"><i class="bi bi-hourglass-split"></i> Patients</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Qualification/Index"><i class="bi bi-layers-fill"></i>my Schedules</a>
+                                <a class="nav-link" href="/Admin/CuraHub/Clinic/Qualification/Index"><i class="bi bi-layers-fill"></i>my Qualifications</a>
+
+
+
+                        </div>
+
+                        <hr />
+
+                    </li>
+
+                </ul>
 
             </div>
 
+        </div>
+        <div class="col-md-10">
+            <div class="hero-section">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+
+        </div>
         }
-      
+        else
+        {
+        <div class="col-md-12">
+            <div class="hero-section">
+                <div class="container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+
+        </div>
+
+        }
     </div>
     
     <!-- Features Section -->

@@ -7,13 +7,14 @@ using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ScheduleVM;
 using CMS.Models.CuraHub.IdentitySection;
 using CMS.Utitlities.Helper;
 using CMS.Utitlities.StaticData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
     [Area(nameof(Admin))]
-    //[Authorize(Roles = ($"{Role.AdminRole}"))]
+    [Authorize(Roles = ($"{Role.AdminRole}"))]
     [Route("Admin/CuraHub/Clinic/RequestDoctor")]
     public class RequestDoctorController : Controller
     {

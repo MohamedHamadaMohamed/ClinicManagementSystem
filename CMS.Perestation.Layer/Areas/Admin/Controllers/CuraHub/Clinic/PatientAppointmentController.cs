@@ -1,12 +1,14 @@
 ﻿using CMS.Data.Access.Layer.Repository.IRepository;
 using CMS.Models.CuraHub.ClinicSection;
+using CMS.Utitlities.StaticData;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
     [Area(nameof(Admin))]
-    //[Authorize(Roles = ($"{Role.AdminRole}"))]
+    [Authorize(Roles = ($"{Role.AdminRole}"))]
     [Route("Admin/CuraHub/Clinic/PatientAppointment")]
     public class PatientAppointmentController : Controller
     {
