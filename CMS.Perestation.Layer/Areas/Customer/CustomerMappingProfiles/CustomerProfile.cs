@@ -3,6 +3,7 @@ using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.ClinicReceptionistVM;
 using CMS.Models.CuraHub.ClinicSection;
 using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.RequestDoctorSectionVM;
 using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.RequestClinicReceptionistSectionVM;
+using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.PatientVM;
 
 namespace CMS.Perestation.Layer.Areas.Customer.CustomerMappingProfiles
 {
@@ -13,6 +14,10 @@ namespace CMS.Perestation.Layer.Areas.Customer.CustomerMappingProfiles
             CreateMap<RequestDoctor, Cust_RequestDoctorCreateVM>().ReverseMap();
 
             CreateMap<RequestClinicReceptionist, Cust_RequestClinicReceptionistCreateVM>().ReverseMap();
+
+            CreateMap<Patient, PatientUpsartVM>().ReverseMap();
+
+            
 
 
         }

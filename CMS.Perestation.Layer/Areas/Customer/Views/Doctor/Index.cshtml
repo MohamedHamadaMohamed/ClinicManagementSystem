@@ -236,7 +236,7 @@
 
                                             <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
 
-                                                    <input type="hidden" name="date" value="@DateTime.Now.AddDays(2).Date" />
+                                                    <input type="hidden" name="date" value="@DateOnly.FromDateTime(DateTime.Now.AddDays(2))" />
                                                     <input type="hidden" id="selectedAppointment" name="ScheduleId" />             
                                                     @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(2).DayOfWeek))
                                                     {

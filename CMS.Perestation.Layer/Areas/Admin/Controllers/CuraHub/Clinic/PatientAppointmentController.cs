@@ -1,6 +1,7 @@
 ﻿using CMS.Data.Access.Layer.Repository.IRepository;
 using CMS.Models.CuraHub.ClinicSection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
 {
@@ -21,12 +22,12 @@ namespace CMS.Perestation.Layer.Areas.Admin.Controllers.CuraHub.Clinic
         [Route("Index")]
         public IActionResult Index(string? query = null, int PageNumber = 1)
         {
-            var patientAppointments = _unitOfWork.PatientAppointmentRepository.Retrive(includeProps: [e =>e.Patient , e =>e.Schedule]);
-            
-            if (PageNumber < 1) PageNumber = 1;
-            patientAppointments = patientAppointments.Skip((PageNumber - 1) * 5).Take(5);
+            var patientAppointments = _unitOfWork.PatientAppointmentRepository.Retrive(includeProps: [e =>e.Patient]).Include(e => e.Schedule).ThenInclude(e=>e.Doctor);
 
-            return View(patientAppointments.ToList());
+            if (PageNumber < 1) PageNumber = 1;
+            var appointments = patientAppointments.Skip((PageNumber - 1) * 5).Take(5);
+
+            return View(appointments.ToList());
         }
     }
 }

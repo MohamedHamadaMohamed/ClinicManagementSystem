@@ -10,5 +10,8 @@ namespace CMS.Utitlities.StaticData
     {
         public const string Single = "Single";
         public const string Married = "Married";
+
+        public static List<string> MaritalStatuss = ["Single", "Married"];
+
     }
 }

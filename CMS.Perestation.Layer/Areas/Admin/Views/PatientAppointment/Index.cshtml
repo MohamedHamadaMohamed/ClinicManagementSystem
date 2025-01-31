@@ -29,12 +29,10 @@
 </form>
 
 <div class="row">
-    <div class="col-10">
+    <div class="col-12">
         <h1>All Clinic Patient Appointment</h1>
     </div>
-    <div class="col-2">
-        <a href="/Admin/CuraHub/Clinic/PatientAppointment/Create" class="btn btn-secondary"><i class="bi bi-plus-circle"></i> Add New Clinic Patient Appointment</a>
-    </div>
+    
 </div>
 <br />
 
@@ -55,10 +53,11 @@
         @foreach (var item in Model)
         {
             <tr style="border:solid">
-                <th scope="row" style="border:solid">@item.Patient.FirstName @item.Patient.LastName</th>
+                <th scope="row" style="border:solid"><a href="/Admin/CuraHub/Clinic/Patient/Details/PatientId@item.PatientId">@item.Patient.FirstName @item.Patient.LastName</a> </th>
+                <th scope="row" style="border:solid">@item.date</th>
                 <th scope="row" style="border:solid">@item.Schedule.Day</th>
                 <th scope="row" style="border:solid">@item.Schedule.Appointment</th>
-                <th scope="row" style="border:solid">@item.Schedule.Doctor.FirstName @item.Schedule.Doctor.LastName</th>
+                <th scope="row" style="border:solid"><a href="/Admin/CuraHub/Clinic/Doctor/Details?DoctorId=@item.Schedule.DoctorId">@item.Schedule.Doctor.FirstName @item.Schedule.Doctor.LastName</a></th>
 
                 <td>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
