@@ -5,6 +5,7 @@ using CMS.Models.CuraHub.ClinicSection.ClinicSectionVM.PatientVM;
 using CMS.Models.CuraHub.IdentitySection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
@@ -13,7 +14,7 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
     [Route("Customer/CuraHub/Clinic/Patient")]
     public class PatientController : Controller
     {
-
+        // Customer/CuraHub/Clinic/Patient/Index?date=02/02/2025&DoctorId=1 
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -26,6 +27,9 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
             this._mapper = mapper;
             this._userManager = userManager;
         }
+
+      
+
 
         [HttpGet]
         [Route("Upsert")]

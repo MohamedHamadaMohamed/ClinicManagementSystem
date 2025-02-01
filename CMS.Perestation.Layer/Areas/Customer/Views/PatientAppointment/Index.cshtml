@@ -1,0 +1,64 @@
+﻿@using CMS.Models.CuraHub.ClinicSection
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CuraHubLayout.cshtml";
+}
+
+@model List<PatientAppointment>
+
+<br />
+<br />
+<br />
+<br />
+ 
+
+
+<div class="bg-white p-2 m-2">
+    <table class="table" style="border:solid">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="text-align:center">Date</th>
+                <th scope="col" style="text-align:center">Patient Name</th>
+                <th scope="col" style="text-align:center">Details</th>
+                <th scope="col" style="text-align:center">Medical Analysis</th>
+                <th scope="col" style="text-align:center">History</th>
+                <th scope="col" style="text-align:center">Status</th>
+                <th scope="col" style="text-align:center">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="border:solid">
+
+                    <th scope="row" style="border:solid">@item.date</th>
+                    <th scope="row" style="border:solid"><a href="/Customer/CuraHub/Clinic/Patient/Details/PatientId@item.PatientId">@item.Patient.FirstName @item.Patient.LastName</a> </th>
+                    <th scope="row" style="border:solid"><a href="#">Details</a></th>
+                    <th scope="row" style="border:solid"><a href="#">Medical Analysis</a></th>
+                    <th scope="row" style="border:solid"><a href="#">History</a></th>
+                    <th scope="row" style="border:solid"><a class="btn btn-success" href="#">Status</a></th>
+
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-primary">Action</button>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    @* <a class="dropdown-item" href="/Admin/Actor/Edit?ActorId=@item.Id">Edit</a> *@
+                                    @* <a class="dropdown-item" href="/Admin/Actor/Delete?ActorId=@item.Id" onclick="return confirm('are you sure?')">Delete</a> *@
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
