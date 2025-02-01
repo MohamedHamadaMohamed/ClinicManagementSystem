@@ -28,8 +28,18 @@ namespace CMS.Perestation.Layer.Areas.Customer.Controllers.CuraHub.Clinic
             this._userManager = userManager;
         }
 
-      
 
+        [Route("Details")]
+        public IActionResult Details(int PatientId)
+        {
+            var Patient = this._unitOfWork.PatientRepository.RetriveItem(filter: e =>e.Id == PatientId);
+            if (Patient !=null)
+            {
+                return View(Patient);
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpGet]
         [Route("Upsert")]

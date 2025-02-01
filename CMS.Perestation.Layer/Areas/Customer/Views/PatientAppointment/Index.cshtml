@@ -33,9 +33,9 @@
             {
                 <tr style="border:solid">
 
-                    <th scope="row" style="border:solid">@item.date</th>
-                    <th scope="row" style="border:solid"><a href="/Customer/CuraHub/Clinic/Patient/Details/PatientId@item.PatientId">@item.Patient.FirstName @item.Patient.LastName</a> </th>
-                    <th scope="row" style="border:solid"><a href="#">Details</a></th>
+                    <th scope="row" style="border:solid">@item.Schedule.Appointment</th>
+                    <th scope="row" style="border:solid">@item.Patient.FirstName @item.Patient.LastName </th>
+                    <th scope="row" style="border:solid"><a target="_blank" href="/Customer/CuraHub/Clinic/Patient/Details?PatientId=@item.PatientId">Details</a></th>
                     <th scope="row" style="border:solid"><a href="#">Medical Analysis</a></th>
                     <th scope="row" style="border:solid"><a href="#">History</a></th>
                     <th scope="row" style="border:solid"><a class="btn btn-success" href="#">Status</a></th>

@@ -7,13 +7,12 @@
 }
 
 @{
-    var cities = new Dictionary<string, List<string>>(); // Use a dictionary to store cities for each state
+    var cities = City.cities; // Use a dictionary to store cities for each state
     List<string> titles = ["Professor", "Lecturer", "Consultant", "Specialist"];
     var states = State.States;
 
     // Assuming you have a method to retrieve cities based on state
-    cities.Add("Cairo", new List<string>() { "Nasr City", "October City", "Giza", "Heliopolis" });
-    cities.Add("Alexandria", new List<string>() { "Smouha", "Moharram Bey", "Mandara", "Gleem" });
+   
     // ... Add other states and cities
 }
 
@@ -174,76 +173,20 @@
 
                                 </div>
                                 <div class="col-7">
-                                    <div class="row ">
-                                        <div class="col-4 bg-light  m-0">
+                                    <div class="row">
+                                        <!-- اليوم -->
+                                        <div class="col-4 bg-light m-0">
                                             <h6 style="font-size:initial" class="text-bg-primary rounded-2">Today</h6>
-                                            <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
-                                                @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.DayOfWeek))
-                                                {
-                                                    @if (schedule.Available)
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                @schedule.Appointment
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                <s> @schedule.Appointment </s>
-                                                            </div>
-                                                        </div>
-                                                    }
-
-                                                }
-                                            </div>
-                                            <a class="btn btn-danger p-1 m-1 rounded-2">BOOK</a>
-
-                                        </div>
-
-                                        <div class="col-4 bg-light  m-0">
-                                            <h6 style="font-size:initial" class="text-bg-primary rounded-2">Tomorrow</h6>
-                                            <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
-                                                @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(1).DayOfWeek))
-                                                {
-                                                    @if (schedule.Available)
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                @schedule.Appointment
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="options">
-                                                            <div class="option">
-                                                                <s> @schedule.Appointment </s>
-                                                            </div>
-                                                        </div>
-                                                    }
-
-                                                }
-                                            </div>
-                                            <a class="btn btn-danger p-1 m-1 rounded-2">BOOK</a>
-
-                                        </div>
-                                        <div class="col-4 bg-light  m-0">
-                                            <h6 style="font-size:initial" class="text-bg-primary rounded-2">@DateTime.Now.AddDays(2).Day / @DateTime.Now.AddDays(2).Month</h6>
-                                            <form id="bookingForm" action="/Customer/CuraHub/Clinic/Patient/Upsert">
-
-                                            <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
-
-                                                    <input type="hidden" name="date" value="@DateOnly.FromDateTime(DateTime.Now.AddDays(2))" />
-                                                    <input type="hidden" id="selectedAppointment" name="ScheduleId" />             
-                                                    @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(2).DayOfWeek))
+                                            <form id="bookingFormToday" action="/Customer/CuraHub/Clinic/Patient/Upsert">
+                                                <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
+                                                    <input type="hidden" name="date" value="@DateOnly.FromDateTime(DateTime.Now)" />
+                                                    <input type="hidden" id="selectedAppointmentToday" name="ScheduleId" />
+                                                    @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.DayOfWeek))
                                                     {
                                                         @if (schedule.Available)
                                                         {
                                                             <div class="options">
-                                                                <div class="option" data-schedule-id="@schedule.Id">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormToday">
                                                                     @schedule.Appointment
                                                                 </div>
                                                             </div>
@@ -251,7 +194,7 @@
                                                         else
                                                         {
                                                             <div class="options">
-                                                                <div class="option" data-schedule-id="@schedule.Id">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormToday">
                                                                     <s>@schedule.Appointment</s>
                                                                 </div>
                                                             </div>
@@ -260,7 +203,68 @@
                                                 </div>
                                                 <button type="submit" class="btn btn-danger p-1 m-1 rounded-2">BOOK</button>
                                             </form>
+                                        </div>
 
+                                        <!-- غدًا -->
+                                        <div class="col-4 bg-light m-0">
+                                            <h6 style="font-size:initial" class="text-bg-primary rounded-2">Tomorrow</h6>
+                                            <form id="bookingFormTomorrow" action="/Customer/CuraHub/Clinic/Patient/Upsert">
+                                                <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
+                                                    <input type="hidden" name="date" value="@DateOnly.FromDateTime(DateTime.Now.AddDays(1))" />
+                                                    <input type="hidden" id="selectedAppointmentTomorrow" name="ScheduleId" />
+                                                    @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(1).DayOfWeek))
+                                                    {
+                                                        @if (schedule.Available)
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormTomorrow">
+                                                                    @schedule.Appointment
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormTomorrow">
+                                                                    <s>@schedule.Appointment</s>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <button type="submit" class="btn btn-danger p-1 m-1 rounded-2">BOOK</button>
+                                            </form>
+                                        </div>
+
+                                        <!-- بعد غد -->
+                                        <div class="col-4 bg-light m-0">
+                                            <h6 style="font-size:initial" class="text-bg-primary rounded-2">@DateTime.Now.AddDays(2).Day / @DateTime.Now.AddDays(2).Month</h6>
+                                            <form id="bookingFormDayAfterTomorrow" action="/Customer/CuraHub/Clinic/Patient/Upsert">
+                                                <div style="height:23vh; overflow:auto" class="rounded-3 border border-2 border-black">
+                                                    <input type="hidden" name="date" value="@DateOnly.FromDateTime(DateTime.Now.AddDays(2))" />
+                                                    <input type="hidden" id="selectedAppointmentDayAfterTomorrow" name="ScheduleId" />
+                                                    @foreach (var schedule in Model.Schedules.Where(e => e.DoctorId == item.Id && e.Day == DateTime.Now.AddDays(2).DayOfWeek))
+                                                    {
+                                                        @if (schedule.Available)
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormDayAfterTomorrow">
+                                                                    @schedule.Appointment
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="options">
+                                                                <div class="option" data-schedule-id="@schedule.Id" data-form-id="bookingFormDayAfterTomorrow">
+                                                                    <s>@schedule.Appointment</s>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
+                                                <button type="submit" class="btn btn-danger p-1 m-1 rounded-2">BOOK</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -326,23 +330,27 @@
 </script>
 
 <script>
-       const options = document.querySelectorAll('.option');
-    const selectedAppointmentInput = document.getElementById('selectedAppointment');
+     document.addEventListener("DOMContentLoaded", function () {
+        const options = document.querySelectorAll('.option');
 
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            // إزالة التحديد من جميع العناصر
-            options.forEach(o => o.classList.remove('selected'));
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                // إزالة التحديد من جميع العناصر
+                options.forEach(o => o.classList.remove('selected'));
 
-            // إضافة التحديد للعنصر الذي تم النقر عليه
-            option.classList.add('selected');
+                // إضافة التحديد للعنصر الذي تم النقر عليه
+                option.classList.add('selected');
 
-            // تحديث قيمة الحقل المخفي بالـ ScheduleId
-            selectedAppointmentInput.value = option.getAttribute('data-schedule-id');
+                // الحصول على الـ Form ID المرتبط بهذا العنصر
+                const formId = option.getAttribute('data-form-id');
+
+                // تحديث قيمة الحقل المخفي في الـ Form المناسب
+                const selectedAppointmentInput = document.querySelector(`#${formId} #selectedAppointment${formId.replace('bookingForm', '')}`);
+                selectedAppointmentInput.value = option.getAttribute('data-schedule-id');
+            });
         });
     });
 </script>
-
 @section Scripts
 {
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

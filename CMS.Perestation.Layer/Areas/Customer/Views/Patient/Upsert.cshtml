@@ -159,9 +159,8 @@
                     <span class="text-danger" asp-validation-for="@Model.Street"></span>
                 </div>
             </div>
-
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <label for="Gender" class="form-label text-black">Gender  </label>
                     <select class="form-select" name="Gender" id="Gender" aria-label="Default select example">
 
@@ -171,7 +170,7 @@
                     </select>
 
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label for="BloodType" class="form-label text-black">Blood Type  ( Optional )</label>
                     <select class="form-select"  name="BloodType" id="BloodType" aria-label="Default select example">
                         <option selected disabled>Select Blood Type</option>
@@ -184,7 +183,7 @@
                     <span class="text-danger" asp-validation-for="@Model.BloodType"></span>
 
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                     <label for="Marital Status" class="form-label text-black">Marital Status</label>
                     <select class="form-select" required="" id="Marital Status" name="MaritalStatus" aria-label="Default select example">
 
@@ -200,6 +199,15 @@
 
 
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="Occupation" class="form-label text-black  text-start d-block">Occupation ( Required )</label>
+                        <input type="text" class="form-control" value="@Model.Occupation" id="Occupation" name="Occupation" placeholder="Occupation">
+                        <span class="text-danger" asp-validation-for="@Model.Occupation"></span>
+
+                    </div>
+                </div>
+
             </div>
             <div class="row">
 
@@ -212,7 +220,6 @@
 
                     </div>
                 </div>
-
                 <div class="col-4">
                     <div class="mb-3">
                         <label for="PersonalNationalIDNumber" class="form-label text-black  text-start d-block">Personal National ID Number (Required )</label>
